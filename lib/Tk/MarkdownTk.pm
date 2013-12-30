@@ -10,11 +10,11 @@ Tk::MarkdownTk - a Tk::Markdown with tk widget tag support
 
 =head1 VERSION
 
-Version 0.02
+Version 0.05
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.05';
 
 use base qw(Tk::Derived Tk::Markdown);
 Construct Tk::Widget 'MarkdownTk';
@@ -60,7 +60,7 @@ into Tk widgets.
 sub insert
 {
   my ($self,$index,$content) = @_;
-  my $res = $self->SUPER::insert($index,FormatMarkdown($content));
+  my $res = $self->SUPER::insert($index,Tk::Markdown::FormatMarkdown($content));
   if(! $self->{inserting}){ ### don't allow recursion...
     $self->{inserting} = 1;
     $self->PaintMarkdown();
@@ -198,10 +198,6 @@ sub Populate
 {
   my ($self,$args) = @_;
   $self->SUPER::Populate($args);
-  my $m = $self->menu->entrycget($self->menu->index('Search'), '-menu');
-  $m->delete($m->index('Replace'));
-  $self->ConfigSpecs(-background=>['SELF'], -foreground=>['SELF'],);
-  $self->defaultStyles(); ### Jimi added this line... does a bit more setup.
 }
 
 

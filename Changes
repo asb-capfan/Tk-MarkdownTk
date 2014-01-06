@@ -1,5 +1,8 @@
 Revision history for Tk-MarkdownTk
 
+0.06    2014-01-06/20:33
+        Redist - suspicious archives repoerted by CPAN testers
+
 0.04/5  2013-12-30/15:47
         Fixed SUPER/inheritance errors
 

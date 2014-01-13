@@ -1,22 +1,24 @@
----
-abstract: 'a Tk::Markdown with tk widget tag support'
+--- #YAML:1.0
+name:               Tk-MarkdownTk
+version:            0.07
+abstract:           a Tk::Markdown with tk widget tag support
 author:
-  - 'jimi <jimi@webu.co.uk>'
-build_requires:
-  Test::More: 0
+    - jimi <jimi@webu.co.uk>
+license:            Artistic_2_0
+distribution_type:  module
 configure_requires:
-  ExtUtils::MakeMaker: 0
-dynamic_config: 1
-generated_by: 'ExtUtils::MakeMaker version 6.74, CPAN::Meta::Converter version 2.120351'
-license: unknown
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
-name: Tk-MarkdownTk
-no_index:
-  directory:
-    - t
-    - inc
+    ExtUtils::MakeMaker:  0
+build_requires:
+    Test::More:  0
 requires:
-  perl: 5.006
-version: 0.06
+    perl:          5.006
+    Tk:            5
+    Tk::Markdown:  0.05
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.57_05
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4

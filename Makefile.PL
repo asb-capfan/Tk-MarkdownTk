@@ -12,7 +12,7 @@ WriteMakefile(
     'PL_FILES'         => {},
     'MIN_PERL_VERSION' => 5.006,
     'CONFIGURE_REQUIRES' => {
-        'ExtUtils::MakeMaker' => 0,
+        'ExtUtils::MakeMaker' => 6.46,
     },
     'BUILD_REQUIRES' => {
         'Test::More' => 0,
@@ -25,4 +25,9 @@ WriteMakefile(
     },
     'dist'  => { 'COMPRESS' => 'gzip -9f', 'SUFFIX' => 'gz', },
     'clean' => { 'FILES' => 'Tk-MarkdownTk-*' },
+    'META_MERGE' => {
+        'resources' => {
+            'repository' => 'https://github.com/asb-capfan/Tk-MarkdownTk',
+        },
+    },
 );

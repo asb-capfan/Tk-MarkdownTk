@@ -6,7 +6,7 @@ use warnings FATAL => 'all';
 
 =head1 NAME
 
-Tk::MarkdownTk - a Tk::Markdown with tk widget tag support
+Tk::MarkdownTk - a Tk::Markdown with Tk widget tag support
 
 =cut
 
@@ -39,17 +39,12 @@ Construct Tk::Widget 'MarkdownTk';
 
 =head2 insert
 
-Whenever insert is called on the MarkdownTk, 
-some translation is done on the text in order to
-display it nicely as markdown.  Tables are reformatted
-(if the line starts with a bar) and headers are
-tagged with different fonts.
+Whenever insert is called on the MarkdownTk, some translation is done on the text in order to display it nicely as Markdown.
+Tables are reformatted (if the line starts with a bar) and headers are tagged with different fonts.
 
-This module is currently under development and
-there's plenty to do, e.g. links, images, etc.
+This module is currently under development and there's plenty to do, e.g. links, images, etc.
 
-In MarkdownTk, html-ish tags are also transformed
-into Tk widgets.
+In MarkdownTk, HTML-ish tags are also transformed into Tk widgets.
 
 =cut
 
@@ -70,18 +65,18 @@ sub insert
 
 =head2 TransformTk
 
-This is called internally.  It parses out HTML-like tags that define Widgets to be drawn
-in the text.
+This is called internally.
+It parses out HTML-like tags that define widgets to be drawn in the text.
 
 eg
 
     <Tk::Button -text="Click Me">
 
-Also, perl can be run from the document... a Tk::Markdown allows <% %> which
-is run prior to insertion (good for formatting) but Tk::MarkdownTk adds running
-perl from <? ?>, which gets replaced inline, after insertion.  This is good for
-adding named subs in the same namespace as the buttons and other tk widgets
-added to the text area.  Eg:
+Also, perl can be run from the document.
+A L<Tk::Markdown> allows <% %> which is run prior to insertion (good for formatting) but Tk::MarkdownTk adds running perl from <? ?>, which gets replaced inline, after insertion.
+This is good for adding named subs in the same namespace as the buttons and other tk widgets added to the text area.
+
+Example:
 
     <Tk::Button -text="Click me" -command="run_this">
     <? sub run_this { print "Hello, world!\n"; } ?>
@@ -95,7 +90,7 @@ So remember:
 
 =cut
 
-### look for <tags> (the other kind of tags) to be tranformed into actual widgets
+### look for <tags> (the other kind of tags) to be transformed into actual widgets
 sub TransformTk {
   my $self = shift;
   ### this is to find <tk::widget attributes>, or <? ?> script.
@@ -157,7 +152,7 @@ sub parseAttrs {
 
 =head2 clipEvents
 
-This copied directly from Tk::ROText
+This copied directly from L<Tk::ROText>.
 
 =cut
 
@@ -168,7 +163,7 @@ sub clipEvents
 
 =head2 ClassInit
 
-This is copied directly from Tk::ROText.
+This is copied directly from L<Tk::ROText>.
 
 =cut
 
@@ -186,8 +181,8 @@ sub ClassInit
 
 =head2 Populate
 
-This is copied and modified from Tk::ROText.  The modification is the addition
-of a call to setDefaultStyles.  That's all.
+This is copied and modified from L<Tk::ROText>.
+The modification is the addition of a call to setDefaultStyles. That's all.
 
 =cut
 
@@ -200,7 +195,7 @@ sub Populate
 
 =head2 Tk::Widget::ScrlMarkdownTk
 
-Copied and adapted from Tk::ROText
+Copied and adapted from L<Tk::ROText>.
 
 =cut
 
@@ -214,9 +209,7 @@ jimi, C<< <jimi at webu.co.uk> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-tk-markdowntk at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tk-MarkdownTk>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+Please report any bugs or feature requests via GitHub: L<https://github.com/asb-capfan/Tk-MarkdownTk>
 
 
 
@@ -232,21 +225,9 @@ You can also look for information at:
 
 =over 4
 
-=item * RT: CPAN's request tracker (report bugs here)
+=item * GitHub (report bugs here):
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Tk-MarkdownTk>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Tk-MarkdownTk>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Tk-MarkdownTk>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Tk-MarkdownTk/>
+L<https://github.com/asb-capfan/Tk-MarkdownTk>
 
 =back
 

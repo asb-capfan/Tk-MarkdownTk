@@ -213,25 +213,6 @@ Please report any bugs or feature requests via GitHub: L<https://github.com/asb-
 
 
 
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Tk::MarkdownTk
-
-
-You can also look for information at:
-
-=over 4
-
-=item * GitHub (report bugs here):
-
-L<https://github.com/asb-capfan/Tk-MarkdownTk>
-
-=back
-
-
 =head1 ACKNOWLEDGEMENTS
 
 

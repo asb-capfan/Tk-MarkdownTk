@@ -71,9 +71,9 @@ eg
 
     <Tk::Button -text="Click Me">
 
-Also, perl can be run from the document.
-A L<Tk::Markdown> allows <% %> which is run prior to insertion (good for formatting) but Tk::MarkdownTk adds running perl from <? ?>, which gets replaced inline, after insertion.
-This is good for adding named subs in the same namespace as the buttons and other tk widgets added to the text area.
+Also, Perl code can be run from the document.
+A L<Tk::Markdown> allows <% %> which is run prior to insertion (good for formatting) but Tk::MarkdownTk adds running Perl code from <? ?>, which gets replaced inline, after insertion.
+This is good for adding named subs in the same namespace as the buttons and other Tk widgets added to the text area.
 
 Example:
 

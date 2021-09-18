@@ -41,7 +41,7 @@ Construct Tk::Widget 'MarkdownTk';
 
 Whenever insert is called on the MarkdownTk, 
 some translation is done on the text in order to
-diplay it nicely as markdown.  Tables are reformatted
+display it nicely as markdown.  Tables are reformatted
 (if the line starts with a bar) and headers are
 tagged with different fonts.
 

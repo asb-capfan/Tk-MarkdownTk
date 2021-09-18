@@ -23,17 +23,17 @@ Construct Tk::Widget 'MarkdownTk';
 
 =head1 SYNOPSIS
 
-	use Tk;
-	use Tk::MarkdownTk;
+    use Tk;
+    use Tk::MarkdownTk;
 
-	my $mw = new MainWindow();
+    my $mw = new MainWindow();
     my $mdt = $mw->MarkdownTk();
 
-	$mdt->insert(q{
-		some markdown here
+    $mdt->insert(q{
+        some markdown here
 
-		with tags like this: <Tk::Button -text="Click me!">
-	});
+        with tags like this: <Tk::Button -text="Click me!">
+    });
 
 =head1 SUBROUTINES/METHODS
 
@@ -75,7 +75,7 @@ in the text.
 
 eg
 
-	<Tk::Button -text="Click Me">
+    <Tk::Button -text="Click Me">
 
 Also, perl can be run from the document... a Tk::Markdown allows <% %> which
 is run prior to insertion (good for formatting) but Tk::MarkdownTk adds running
@@ -83,14 +83,14 @@ perl from <? ?>, which gets replaced inline, after insertion.  This is good for
 adding named subs in the same namespace as the buttons and other tk widgets
 added to the text area.  Eg:
 
-	<Tk::Button -text="Click me" -command="run_this">
-	<? sub run_this { print "Hello, world!\n"; } ?>
+    <Tk::Button -text="Click me" -command="run_this">
+    <? sub run_this { print "Hello, world!\n"; } ?>
 
 So remember:
-	
-	% formatted
-	
-	? subs
+    
+    % formatted
+    
+    ? subs
 
 
 =cut

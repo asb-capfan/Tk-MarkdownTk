@@ -26,10 +26,10 @@ Construct Tk::Widget 'MarkdownTk';
     use Tk;
     use Tk::MarkdownTk;
 
-    my $mw = new MainWindow();
+    my $mw = Tk::MainWindow->new();
     my $mdt = $mw->MarkdownTk();
 
-    $mdt->insert(q{
+    $mdt->insert('end', q{
         some markdown here
 
         with tags like this: <Tk::Button -text="Click me!">

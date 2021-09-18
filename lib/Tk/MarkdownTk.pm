@@ -67,7 +67,7 @@ sub insert {
 This is called internally.
 It parses out HTML-like tags that define widgets to be drawn in the text.
 
-eg
+Example:
 
     <Tk::Button -text="Click Me">
 

@@ -30,17 +30,11 @@ perldoc command.
 
 You can also look for information at:
 
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Tk-MarkdownTk
-
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Tk-MarkdownTk
-
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Tk-MarkdownTk
+    GitHub (report bugs here)
+        https://github.com/asb-capfan/Tk-MarkdownTk
 
     Search CPAN
-        http://search.cpan.org/dist/Tk-MarkdownTk/
+        https://metacpan.org/pod/Tk::MarkdownTk
 
 
 LICENSE AND COPYRIGHT

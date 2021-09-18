@@ -49,18 +49,17 @@ In MarkdownTk, HTML-ish tags are also transformed into Tk widgets.
 =cut
 
 
-sub insert
-{
-  my ($self,$index,$content) = @_;
-  my $res = $self->SUPER::insert($index,Tk::Markdown::FormatMarkdown($content));
-  if(! $self->{inserting}){ ### don't allow recursion...
-    $self->{inserting} = 1;
-    $self->PaintMarkdown();
-    $self->TransformTk();
-    $self->see("1.0");
-    $self->{inserting} = 0;
-  }
-  return $res;
+sub insert {
+    my ($self,$index,$content) = @_;
+    my $res = $self->SUPER::insert($index,Tk::Markdown::FormatMarkdown($content));
+    if(! $self->{inserting}) { ### don't allow recursion...
+        $self->{inserting} = 1;
+        $self->PaintMarkdown();
+        $self->TransformTk();
+        $self->see("1.0");
+        $self->{inserting} = 0;
+    }
+    return $res;
 }
 
 =head2 TransformTk
@@ -92,36 +91,34 @@ So remember:
 
 ### look for <tags> (the other kind of tags) to be transformed into actual widgets
 sub TransformTk {
-  my $self = shift;
-  ### this is to find <tk::widget attributes>, or <? ?> script.
-  my $re = qr/<Tk\:\:\w+[^>]*>|<\?.*?\?>/s;
-  $self->FindAll('-regexp','-case', $re);
-  my @i = $self->tagRanges('sel');
-  #print map {"$_\n"} @i;
-  for(my $i = @i-2; $i >= 0; $i-=2){
-    my ($s,$e) = ($i[$i], $i[$i+1]);
-    my $string = $self->get($s,$e);
-    if($string =~ /<Tk\:\:(\w+)(.*)>/){
-      my ($w,$a) = ($1,$2);
-      my %a = parseAttrs($a);
-      $self->delete($s,$e);
-      my $t = $self->$w(%a);
-      $self->windowCreate($s,-window=>$t);
+    my $self = shift;
+    ### this is to find <tk::widget attributes>, or <? ?> script.
+    my $re = qr/<Tk\:\:\w+[^>]*>|<\?.*?\?>/s;
+    $self->FindAll('-regexp','-case', $re);
+    my @i = $self->tagRanges('sel');
+    #print map {"$_\n"} @i;
+    for(my $i = @i-2; $i >= 0; $i-=2) {
+        my ($s,$e) = ($i[$i], $i[$i+1]);
+        my $string = $self->get($s,$e);
+        if($string =~ /<Tk\:\:(\w+)(.*)>/) {
+            my ($w,$a) = ($1,$2);
+            my %a = parseAttrs($a);
+            $self->delete($s,$e);
+            my $t = $self->$w(%a);
+            $self->windowCreate($s,-window=>$t);
+        } elsif($string =~ /<\?=(.*)\?>/s) {
+            my $sub;
+            eval("\$sub = sub { $1 }");
+            die "$@ - somewhere in: $1" if $@;
+            $self->delete($s,$e);
+            $self->insert($s,&$sub());
+        } elsif($string =~ /<\?(.*)\?>/s) {
+            $self->delete($s,$e);
+            eval("$1");
+            die "$@ - somewhere in: $1" if $@;
+            die $@ if $@;
+        }
     }
-    elsif($string =~ /<\?=(.*)\?>/s){
-      my $sub;
-      eval("\$sub = sub { $1 }");
-      die "$@ - somewhere in: $1" if $@;
-      $self->delete($s,$e);
-      $self->insert($s,&$sub());
-    }
-    elsif($string =~ /<\?(.*)\?>/s){
-      $self->delete($s,$e);
-      eval("$1");
-      die "$@ - somewhere in: $1" if $@;
-      die $@ if $@;
-    }
-  }
 }
 
 =head2 parseAttrs
@@ -132,21 +129,21 @@ A helper function for TransformTk.
 
 ### parse some attributes
 sub parseAttrs {
-  my ($attrs) = @_;
-  my %attrs = ();
-  while($attrs =~ /\G.*?([\w-]+)(=""|=''|=".*?[^\\]"|='.*?[^\\]'|=[^"']\S*|)/g){
-    my ($k,$v) = ($1,$2);
-    $v ||= 1;
-    $v =~ s/^=//;
-    $v =~ s/^(["'])(.*)\1$/$2/;
-    if($k =~ /^-(?:command)$/){
-      eval(" \$v = sub { $v }; ");
-      die "$@ - somewhere in: $v" if $@;
-      #print "COMMAND: $v\n";
+    my ($attrs) = @_;
+    my %attrs = ();
+    while($attrs =~ /\G.*?([\w-]+)(=""|=''|=".*?[^\\]"|='.*?[^\\]'|=[^"']\S*|)/g) {
+        my ($k,$v) = ($1,$2);
+        $v ||= 1;
+        $v =~ s/^=//;
+        $v =~ s/^(["'])(.*)\1$/$2/;
+        if($k =~ /^-(?:command)$/) {
+            eval(" \$v = sub { $v }; ");
+            die "$@ - somewhere in: $v" if $@;
+            #print "COMMAND: $v\n";
+        }
+        $attrs{$k} = $v;
     }
-    $attrs{$k} = $v;
-  }
-  return %attrs;
+    return %attrs;
 }
 
 
@@ -156,9 +153,8 @@ This copied directly from L<Tk::ROText>.
 
 =cut
 
-sub clipEvents
-{
-  return qw[Copy];
+sub clipEvents {
+    return qw[Copy];
 }
 
 =head2 ClassInit
@@ -167,16 +163,15 @@ This is copied directly from L<Tk::ROText>.
 
 =cut
 
-sub ClassInit
-{
-  my ($class,$mw) = @_;
-  my $val = $class->bindRdOnly($mw);
-  my $cb = $mw->bind($class,'<Next>');
-  $mw->bind($class,'<space>',$cb) if (defined $cb);
-  $cb = $mw->bind($class,'<Prior>');
-  $mw->bind($class,'<BackSpace>', $cb) if (defined $cb);
-  $class->clipboardOperations($mw,'Copy');
-  return $val;
+sub ClassInit {
+    my ($class,$mw) = @_;
+    my $val = $class->bindRdOnly($mw);
+    my $cb = $mw->bind($class,'<Next>');
+    $mw->bind($class,'<space>',$cb) if (defined $cb);
+    $cb = $mw->bind($class,'<Prior>');
+    $mw->bind($class,'<BackSpace>', $cb) if (defined $cb);
+    $class->clipboardOperations($mw,'Copy');
+    return $val;
 }
 
 =head2 Populate
@@ -186,10 +181,9 @@ The modification is the addition of a call to setDefaultStyles. That's all.
 
 =cut
 
-sub Populate
-{
-  my ($self,$args) = @_;
-  $self->SUPER::Populate($args);
+sub Populate {
+    my ($self,$args) = @_;
+    $self->SUPER::Populate($args);
 }
 
 
